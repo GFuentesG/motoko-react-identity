@@ -9,6 +9,9 @@ dotenv.config({ path: '../../.env' });
 export default defineConfig({
   build: {
     emptyOutDir: true,
+    rollupOptions: {
+      
+    },
   },
   optimizeDeps: {
     esbuildOptions: {
@@ -24,6 +27,9 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+    fs: {
+      strict: false,
+    }
   },
   plugins: [
     react(),
@@ -33,6 +39,8 @@ export default defineConfig({
   resolve: {
     alias: [
       {
+        '@dfinity/auth-client': fileURLToPath(new URL('../node_modules/@dfinity/auth-client/dist/auth-client.cjs.js', import.meta.url)),
+        '@dfinity/agent': fileURLToPath(new URL('../node_modules/@dfinity/agent/dist/agent.cjs.js', import.meta.url)),
         find: "declarations",
         replacement: fileURLToPath(
           new URL("../declarations", import.meta.url)
